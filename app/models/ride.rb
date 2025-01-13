@@ -8,7 +8,7 @@ class Ride < ApplicationRecord
   
   has_secure_token :share_code
   
-  enum status: { pending: 0, accepted: 1, in_progress: 2, completed: 3, cancelled: 4 }
+  enum :status, { pending: 0, accepted: 1, in_progress: 2, completed: 3, cancelled: 4 }
   
   validates :pickup_location, :dropoff_location, presence: true
   validates :estimated_price, presence: true, numericality: { greater_than: 0 }

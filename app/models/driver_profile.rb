@@ -8,7 +8,7 @@ class DriverProfile < ApplicationRecord
   validates :license_number, presence: true, uniqueness: true
   validates :status, presence: true
   
-  enum status: { available: 0, busy: 1, offline: 2 }
+  enum :status, { available: 0, busy: 1, offline: 2 }
   
   broadcasts_refreshes
 end 

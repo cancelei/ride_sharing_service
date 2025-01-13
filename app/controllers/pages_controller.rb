@@ -3,24 +3,9 @@ class PagesController < ApplicationController
   
   def home
     if user_signed_in?
-      redirect_to after_sign_in_path
-    end
-  end
-  
-  private
-  
-  def after_sign_in_path
-    case current_user.role
-    when 'passenger'
-      rides_path
-    when 'driver'
-      driver_dashboard_path
-    when 'cab_association'
-      cab_association_dashboard_path
-    when 'admin'
-      admin_dashboard_path
+      redirect_to after_sign_in_path_for(current_user)
     else
-      root_path
+      render 'home'
     end
   end
 end 

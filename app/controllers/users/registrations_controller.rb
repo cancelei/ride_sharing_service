@@ -1,10 +1,10 @@
-class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
-  before_action :configure_permitted_parameters, if: :devise_controller?
+class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
 
   protected
 
-  def configure_permitted_parameters
+  def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [
       :phone,
       :role,
@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
       :whatsapp_number,
       :telegram_username
     ])
+  end
 
+  def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [
       :phone,
       { notification_preferences: {} },
@@ -21,18 +23,16 @@ class ApplicationController < ActionController::Base
     ])
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_up_path_for(resource)
     case resource.role
     when 'passenger'
-      rides_path
+      new_passenger_profile_path
     when 'driver'
-      driver_dashboard_path
+      new_driver_profile_path
     when 'cab_association'
-      cab_association_dashboard_path
-    when 'admin'
-      admin_dashboard_path
+      new_cab_association_path
     else
       root_path
     end
   end
-end
+end 

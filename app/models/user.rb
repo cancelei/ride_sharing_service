@@ -7,11 +7,11 @@ class User < ApplicationRecord
   has_one :passenger_profile
   has_one :cab_association
   
-  enum role: { passenger: 0, driver: 1, cab_association: 2, admin: 3 }
+  enum :role, { passenger: 0, driver: 1, cab_association: 2, admin: 3 }
   
   validates :email, presence: true, uniqueness: true
-  validates :phone, presence: true, uniqueness: true
-  validates :whatsapp_number, phone: true, allow_blank: true
+  validates :phone, presence: true, uniqueness: true, phone: { possible: true, allow_blank: true }
+  validates :whatsapp_number, phone: { possible: true, allow_blank: true }
   validates :telegram_username, format: { with: /\A@?[a-zA-Z0-9_]{5,32}\z/ }, allow_blank: true
   
   # Notification preferences validation

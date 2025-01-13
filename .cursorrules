@@ -1,0 +1,160 @@
+Product Requirements Document (PRD) for Ridesharing App
+
+Overview
+
+This ridesharing application is designed to provide services similar to Uber, DiDi, and Lyft while introducing a unique feature: leader-passenger and follower-passenger coordination. Passengers can travel as a group by having a leader book a ride and followers join it by entering a shared ride code.
+
+Key Features
+
+User Roles
+
+Passenger
+
+Register/log in.
+
+Request solo or group rides.
+
+Join a leader’s ride by entering a ride code.
+
+Track ride status and view history.
+
+Rate drivers.
+
+Driver
+
+Register/log in via an associated Cab Association.
+
+Provide vehicle details (make, model, year, license plate).
+
+Accept/reject ride requests.
+
+View ride schedules and earnings.
+
+Cab Association
+
+Register and manage associated drivers.
+
+View fleet earnings and ride activity.
+
+Monitor driver reviews.
+
+Administrator
+
+Manage users and system settings.
+
+Monitor transactions, rides, and reports.
+
+Registration
+
+Cab Association Registration
+
+Cab associations register with company details.
+
+Post-registration, they can invite drivers to join.
+
+Driver Registration
+
+Drivers register by selecting an existing Cab Association and providing vehicle information.
+
+Passenger Registration
+
+Passengers register via email or social accounts.
+
+Ride Booking Process
+
+Solo Ride
+
+Passengers request a ride by specifying pick-up/drop-off points.
+
+Leader-Follower Ride
+
+A leader initiates a ride and shares a ride code.
+
+Followers join the ride by entering the code.
+
+The leader manages the request and payment.
+
+Payment Options
+
+Credit/debit cards via Stripe.
+
+Notifications
+
+Push notifications for ride updates.
+
+Email, WhatsApp, or Telegram ride confirmations.
+
+Ratings and Reviews
+
+Passengers rate drivers; drivers rate passengers.
+
+Admins and Cab Associations monitor reviews.
+
+Technical Stack
+
+Backend
+
+Ruby on Rails: Fast development with a convention-over-configuration approach.
+
+PostgreSQL: Scalable relational database.
+
+Frontend
+
+Hotwire (Turbo + Stimulus): Real-time updates with minimal page reloads.
+
+Tailwind CSS: Modern, consistent UI design.
+
+Infrastructure
+
+Hosting: Rails 8 Kamal v2.4 on a cloud VPS.
+
+Third-Party Services:
+
+Maps: Google Maps API or Mapbox.
+
+Payments: Stripe.
+
+Notifications: Firebase Cloud Messaging (FCM).
+
+Security
+
+Authentication & Authorization
+
+Devise for authentication.
+
+Role-based access control (RBAC).
+
+Data Protection
+
+SSL/TLS for communication.
+
+Bcrypt for password encryption.
+
+Regular database backups.
+
+Vulnerability Protection
+
+Rate limiting.
+
+Protection against XSS, CSRF, and SQL injection.
+
+Scalability Plan
+
+Use background jobs (Rails Trifecta: Solid Cache, Solid Cable, Solid Queue).
+
+Optimize database queries using eager loading.
+
+Implement caching for frequently accessed data.
+
+Post-Launch Enhancements
+
+Ride-sharing suggestions based on travel patterns.
+
+Loyalty program for frequent users.
+
+Multi-language support.
+
+Conclusion
+
+This app offers a user-friendly platform with enhanced group travel options. Its robust architecture ensures scalability, performance, and security, making it a reliable choice for the target market.
+

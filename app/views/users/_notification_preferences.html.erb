@@ -1,0 +1,60 @@
+<div class="notification-preferences p-4 bg-white rounded-lg shadow">
+  <h3 class="text-lg font-semibold mb-4">Notification Preferences</h3>
+  
+  <%= form_with(model: current_user, local: true, class: "space-y-4") do |f| %>
+    <div class="flex items-center space-x-2">
+      <%= f.label :email_notifications, class: "text-gray-700" do %>
+        <%= f.check_box :notification_preferences, 
+            { checked: true, disabled: true }, 
+            { email: true }, 
+            { email: false } %>
+        <span>Email Notifications (Required)</span>
+      <% end %>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <%= f.label :whatsapp_notifications, class: "text-gray-700" do %>
+        <%= f.check_box :notification_preferences, 
+            { checked: current_user.notification_preferences['whatsapp'] },
+            { whatsapp: true },
+            { whatsapp: false } %>
+        <span>WhatsApp Notifications</span>
+      <% end %>
+    </div>
+
+    <% if current_user.notification_preferences['whatsapp'] %>
+      <div class="ml-6">
+        <%= f.label :whatsapp_number, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :whatsapp_number, 
+            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+      </div>
+    <% end %>
+
+    <div class="flex items-center space-x-2">
+      <%= f.label :telegram_notifications, class: "text-gray-700" do %>
+        <%= f.check_box :notification_preferences,
+            { checked: current_user.notification_preferences['telegram'] },
+            { telegram: true },
+            { telegram: false } %>
+        <span>Telegram Notifications</span>
+      <% end %>
+    </div>
+
+    <% if current_user.notification_preferences['telegram'] %>
+      <div class="ml-6">
+        <%= f.label :telegram_username, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :telegram_username,
+            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+      </div>
+    <% end %>
+
+    <div class="mt-4">
+      <%= f.submit "Update Preferences",
+          class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+    </div>
+  <% end %>
+</div>
+
+<%= turbo_frame_tag "notification_preferences" do %>
+  <%= render "users/notification_preferences" %>
+<% end %> 

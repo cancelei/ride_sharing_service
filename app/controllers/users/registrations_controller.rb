@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: [ :create ]
+  before_action :configure_account_update_params, only: [ :update ]
 
   protected
 
@@ -25,14 +25,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     case resource.role
-    when 'passenger'
+    when "passenger"
       new_passenger_profile_path
-    when 'driver'
+    when "driver"
       new_driver_profile_path
-    when 'cab_association'
+    when "cab_association"
       new_cab_association_path
     else
       root_path
     end
   end
-end 
+end

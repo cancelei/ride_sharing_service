@@ -20,13 +20,13 @@ class CreateUsers < ActiveRecord::Migration[8.0]
       # Custom fields
       t.string :phone, null: false
       t.integer :role, default: 0
-      
+
       t.timestamps null: false
     end
-    
+
     add_index :users, :email, unique: true
     add_index :users, :phone, unique: true
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token, unique: true
   end
-end 
+end

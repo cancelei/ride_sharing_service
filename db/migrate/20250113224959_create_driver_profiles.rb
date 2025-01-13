@@ -11,9 +11,9 @@ class CreateDriverProfiles < ActiveRecord::Migration[8.0]
       t.boolean :active, default: true
       t.timestamps null: false
     end
-    
+
     add_index :driver_profiles, :license_number, unique: true
     add_index :driver_profiles, :status
-    add_index :driver_profiles, [:latitude, :longitude]
+    add_index :driver_profiles, [ :latitude, :longitude ]
   end
-end 
+end

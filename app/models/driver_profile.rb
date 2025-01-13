@@ -4,11 +4,11 @@ class DriverProfile < ApplicationRecord
   has_one :vehicle
   has_many :rides
   has_many :reviews, as: :reviewable
-  
+
   validates :license_number, presence: true, uniqueness: true
   validates :status, presence: true
-  
+
   enum :status, { available: 0, busy: 1, offline: 2 }
-  
+
   broadcasts_refreshes
-end 
+end

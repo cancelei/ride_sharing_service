@@ -1,6 +1,6 @@
 class RidesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_ride, only: [:show, :update, :join, :cancel]
+  before_action :set_ride, only: [ :show, :update, :join, :cancel ]
 
   def index
     @rides = current_user.passenger_profile.rides.includes(:driver_profile)
@@ -12,12 +12,12 @@ class RidesController < ApplicationController
 
   def create
     @ride = current_user.passenger_profile.rides.build(ride_params)
-    
+
     if @ride.save
       broadcast_ride_request
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to @ride, notice: 'Ride requested successfully.' }
+        format.html { redirect_to @ride, notice: "Ride requested successfully." }
       end
     else
       render :new, status: :unprocessable_entity
@@ -26,9 +26,9 @@ class RidesController < ApplicationController
 
   def join
     return unless @ride.pending?
-    
+
     @ride_follower = RideFollower.new(ride: @ride, passenger_profile: current_user.passenger_profile)
-    
+
     if @ride_follower.save
       Turbo::StreamsChannel.broadcast_append_to(
         "ride_#{@ride.id}_followers",
@@ -60,4 +60,4 @@ class RidesController < ApplicationController
       )
     end
   end
-end 
+end

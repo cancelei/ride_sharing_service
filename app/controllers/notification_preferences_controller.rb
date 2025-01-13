@@ -4,14 +4,14 @@ class NotificationPreferencesController < ApplicationController
   def update
     if current_user.update(notification_preferences_params)
       respond_to do |format|
-        format.turbo_stream { 
+        format.turbo_stream {
           render turbo_stream: turbo_stream.replace(
             "notification_preferences",
             partial: "users/notification_preferences",
             locals: { user: current_user }
           )
         }
-        format.html { redirect_to profile_path, notice: 'Notification preferences updated successfully.' }
+        format.html { redirect_to profile_path, notice: "Notification preferences updated successfully." }
       end
     else
       respond_to do |format|
@@ -31,9 +31,9 @@ class NotificationPreferencesController < ApplicationController
 
   def notification_preferences_params
     params.require(:user).permit(
-      notification_preferences: [:email, :whatsapp, :telegram],
+      { notification_preferences: [ :email, :whatsapp, :telegram ] },
       :whatsapp_number,
       :telegram_username
     )
   end
-end 
+end

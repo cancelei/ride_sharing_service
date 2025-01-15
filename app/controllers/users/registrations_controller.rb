@@ -26,11 +26,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(resource)
     case resource.role
     when "passenger"
-      new_passenger_profile_path
+      passenger_dashboard_path
     when "driver"
-      new_driver_profile_path
+      driver_dashboard_path
     when "cab_association"
-      new_cab_association_path
+      cab_association_dashboard_path
     else
       root_path
     end

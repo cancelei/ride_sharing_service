@@ -1,0 +1,41 @@
+<div class="min-h-screen bg-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 gap-6">
+      <!-- Map Section -->
+      <div class="bg-white rounded-lg shadow-sm p-6">
+        <h2 class="text-lg font-semibold mb-4">Your Location</h2>
+        <div 
+          data-controller="map"
+          data-map-api-key-value="<%= ENV['GOOGLE_MAPS_API_KEY'] %>"
+          class="w-full h-96 rounded-lg">
+        </div>
+      </div>
+      
+      <!-- Active Ride Section -->
+      <%= turbo_frame_tag "active_ride" do %>
+        <% if @active_ride %>
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-semibold mb-4">Current Ride</h2>
+            <%= render "rides/ride", ride: @active_ride %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <!-- Quick Actions -->
+      <div class="bg-white rounded-lg shadow-sm p-6">
+        <h2 class="text-lg font-semibold mb-4">Quick Actions</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <%= link_to new_ride_path, 
+              class: "btn-primary text-center" do %>
+            Request New Ride
+          <% end %>
+          
+          <%= link_to passenger_rides_path, 
+              class: "btn-secondary text-center" do %>
+            View All Rides
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

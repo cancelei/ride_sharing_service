@@ -20,6 +20,10 @@ class User < ApplicationRecord
   # Notification channels setup
   after_initialize :set_default_notification_preferences, if: :new_record?
 
+  after_create :create_passenger_profile, if: :passenger?
+  after_create :create_driver_profile, if: :driver?
+  after_create :create_cab_association, if: :cab_association?
+
   # Notification methods
   def notify(notification)
     enabled_channels.each do |channel|

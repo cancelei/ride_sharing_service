@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # Devise routes with custom controllers
   devise_for :users, controllers: {
     registrations: "users/registrations",
-    sessions: "users/sessions",
+    sessions: "users/sessions"
   }, path: "", path_names: {
     sign_in: "login",
     sign_out: "logout",
@@ -35,6 +35,17 @@ Rails.application.routes.draw do
     resources :reviews, only: [ :create ]
     resources :followers, only: [ :create, :destroy ], controller: "ride_followers"
   end
+
+    # Add inside the existing routes
+    namespace :passenger do
+      resource :dashboard, only: [ :show ]
+      resources :rides, only: [ :index ] do
+        collection do
+          get :active
+          get :history
+        end
+      end
+    end
 
   # Driver specific routes
   namespace :driver do

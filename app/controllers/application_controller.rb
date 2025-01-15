@@ -20,19 +20,4 @@ class ApplicationController < ActionController::Base
       :telegram_username
     ])
   end
-
-  def after_sign_in_path_for(resource)
-    case resource.role
-    when "passenger"
-      rides_path
-    when "driver"
-      driver_dashboard_path
-    when "cab_association"
-      cab_association_dashboard_path
-    when "admin"
-      admin_dashboard_path
-    else
-      root_path
-    end
-  end
 end

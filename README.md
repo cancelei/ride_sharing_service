@@ -1,9 +1,6 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+A Ruby on Rails-based ride-sharing app with Stripe integration that seamlessly connects users with local taxi companies in any pop-up city. It supports both private and public rides, allowing riders to join existing public trips, and making transportation more flexible and community-driven.
 
 * Ruby version
 
@@ -21,4 +18,4 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+

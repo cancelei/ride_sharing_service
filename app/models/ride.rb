@@ -6,7 +6,7 @@ class Ride < ApplicationRecord
   has_many :ride_followers
   has_many :followers, through: :ride_followers, source: :passenger_profile
 
-  has_secure_token :share_code
+  # has_secure_token :share_code
 
   enum :status, { pending: 0, accepted: 1, in_progress: 2, completed: 3, cancelled: 4 }
 

@@ -1,6 +1,6 @@
 class RidesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_ride, only: [ :show, :update, :join, :cancel ]
+  before_action :set_ride, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @rides = current_user.passenger_profile.rides.includes(:driver_profile)
@@ -37,6 +37,10 @@ class RidesController < ApplicationController
         locals: { follower: current_user.passenger_profile }
       )
     end
+  end
+
+  def show
+    # @ride is already set by the before_action
   end
 
   private

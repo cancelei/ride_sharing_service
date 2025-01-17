@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_14_162139) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_15_220938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -77,9 +77,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_14_162139) do
     t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "passenger_profile_id"
     t.index ["driver_profile_id"], name: "index_rides_on_driver_profile_id"
     t.index ["dropoff_latitude", "dropoff_longitude"], name: "index_rides_on_dropoff_latitude_and_dropoff_longitude"
     t.index ["leader_id"], name: "index_rides_on_leader_id"
+    t.index ["passenger_profile_id"], name: "index_rides_on_passenger_profile_id"
     t.index ["pickup_latitude", "pickup_longitude"], name: "index_rides_on_pickup_latitude_and_pickup_longitude"
     t.index ["ride_code"], name: "index_rides_on_ride_code", unique: true
     t.index ["status"], name: "index_rides_on_status"
@@ -118,5 +120,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_14_162139) do
   add_foreign_key "driver_profiles", "users"
   add_foreign_key "passenger_profiles", "users"
   add_foreign_key "rides", "driver_profiles"
+  add_foreign_key "rides", "passenger_profiles"
   add_foreign_key "rides", "passenger_profiles", column: "leader_id"
 end

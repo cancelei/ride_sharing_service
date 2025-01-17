@@ -4,6 +4,7 @@ module Passenger
     before_action :ensure_passenger_role
 
     def show
+      @rides = current_user.passenger_profile.rides
       @active_ride = current_user.passenger_profile.rides.in_progress.first
       @recent_rides = current_user.passenger_profile.rides.completed.limit(5)
     end

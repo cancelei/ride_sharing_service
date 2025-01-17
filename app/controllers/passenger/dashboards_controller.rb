@@ -12,7 +12,7 @@ module Passenger
     private
 
     def ensure_passenger_role
-      unless current_user.passenger?
+      unless current_user.role_passenger?
         redirect_to root_path, alert: "Access denied."
       end
     end

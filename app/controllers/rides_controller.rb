@@ -50,11 +50,11 @@ class RidesController < ApplicationController
   end
 
   def ride_params
-    params.require(:ride).permit(:pickup_location, :dropoff_location, :scheduled_time)
+    params.require(:ride).permit(:pickup_address, :dropoff_address, :scheduled_at)
   end
 
   def broadcast_ride_request
-    nearby_drivers = DriverProfile.available.near(@ride.pickup_location, 5)
+    nearby_drivers = DriverProfile.available.near(@ride.pickup_address, 5)
     nearby_drivers.each do |driver|
       Turbo::StreamsChannel.broadcast_append_to(
         driver,

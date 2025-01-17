@@ -3,7 +3,7 @@
     <%= link_to "RideShare", root_path, class: "text-indigo-600 font-bold text-xl" %>
     <div class="flex items-center">
       <% if user_signed_in? %>
-        <%= link_to "Dashboard", passenger_dashboard_path, class: "text-indigo-600 font-bold text-xl" %>
+        <%= link_to "Dashboard", user_dashboard, class: "text-indigo-600 font-bold text-xl" %>
         <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "text-indigo-600 font-bold text-xl" %>
       <% else %>
         <%= link_to "Sign In", new_user_session_path, class: "text-indigo-600 font-bold text-xl" %>

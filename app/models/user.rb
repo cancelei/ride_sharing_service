@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_one :passenger_profile
   has_one :cab_association
 
-  enum :role, { passenger: 0, driver: 1, cab_association: 2, admin: 3 }
+  enum :role, { passenger: 0, driver: 1, cab_association: 2, admin: 3 }, prefix: true
 
   validates :email, presence: true, uniqueness: true
   validates :phone, presence: true, uniqueness: true, phone: { possible: true, allow_blank: true }
@@ -20,9 +20,9 @@ class User < ApplicationRecord
   # Notification channels setup
   after_initialize :set_default_notification_preferences, if: :new_record?
 
-  after_create :create_passenger_profile, if: :passenger?
-  after_create :create_driver_profile, if: :driver?
-  after_create :create_cab_association, if: :cab_association?
+  after_create :create_passenger_profile, if: :role_passenger?
+  after_create :create_driver_profile, if: :role_driver?
+  after_create :create_cab_association, if: :role_cab_association?
 
   # Notification methods
   def notify(notification)
